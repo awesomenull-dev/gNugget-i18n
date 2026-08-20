@@ -34,16 +34,6 @@ Then merge the updated `Nugget_en.ts` here — existing translations for
 unchanged strings carry over automatically; new/changed strings show up as
 untranslated for translators to fill in.
 
-## Getting translations back into GoldenNugget
-
-Maintainers: before a release, copy the finished `.ts` files from
-[`translations/`](translations/) into the main repo's
-`src/qt/translations/` and compile:
-
-```bash
-pyside6-lrelease src/qt/translations/Nugget_{language code}.ts -qm src/qt/translations/Nugget_{language code}.qm
-```
-
 ## Questions
 
 Open an issue here, or ask in the main
