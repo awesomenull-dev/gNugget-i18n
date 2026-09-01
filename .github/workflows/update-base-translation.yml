@@ -1,0 +1,62 @@
+name: Update Base Translation
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'  # Every Monday 3 AM UTC
+  repository_dispatch:
+    types: [update-base]
+
+permissions:
+  contents: write
+
+jobs:
+  update-base-translation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout gNugget-i18n
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+          cache: 'pip'
+
+      - name: Install PySide6
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyside6
+
+      - name: Clone GoldenNugget source
+        run: |
+          git clone --depth 1 \
+            https://github.com/awesomenull-dev/GoldenNugget.git \
+            "$RUNNER_TEMP/goldennugget"
+
+      - name: Regenerate base translation
+        run: |
+          chmod +x scripts/update_base_translation.sh
+          ./scripts/update_base_translation.sh "$RUNNER_TEMP/goldennugget"
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if ! git diff --quiet; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Nugget_en.ts
+          git commit -m "chore: regenerate base translation (Nugget_en.ts) from GoldenNugget source"
+          git push origin HEAD:main
