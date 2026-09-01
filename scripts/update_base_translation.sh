@@ -32,6 +32,7 @@ fi
 # GoldenNugget README. Glob patterns are expanded in the loop below (array
 # elements with literals are NOT expanded by bash, so we expand them here).
 PATTERNS=(
+  main_app.py
   src/gui/main_window.py
   src/gui/pages/page.py
   src/gui/pages/pages_list.py

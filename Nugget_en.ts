@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name></name>
+    <message>
+        <location filename="../../../home/awesomenull/Projects/GoldenNugget/main_app.py" line="49"/>
+        <source>This version of iOS is currently not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../home/awesomenull/Projects/GoldenNugget/main_app.py" line="54"/>
+        <source>GoldenNugget Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../home/awesomenull/Projects/GoldenNugget/main_app.py" line="55"/>
+        <source>GoldenNugget has been disabled by its safety rules.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AboutProgramDialog</name>
     <message>
         <location filename="../../../home/awesomenull/Projects/GoldenNugget/src/gui/dialogs/dialogs.py" line="59"/>
